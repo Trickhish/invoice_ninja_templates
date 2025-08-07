@@ -1,0 +1,521 @@
+<!-- STYLE START -->
+<style id="style">
+    @import url($font_url);
+
+    #invoiceninja-whitelabel-logo{
+        display:none;
+    }
+
+    :root {
+        --primary-color: $primary_color;
+        --secondary-color: $secondary_color;
+        --accent-color: #f8f9fa;
+        --border-color: #e9ecef;
+        --text-dark: #2c3e50;
+        --text-muted: #6c757d;
+        --line-height: 1.6;
+        --border-radius: 8px;
+        --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: $font_name, 'Inter', 'Segoe UI', Helvetica, sans-serif;
+        font-size: $font_size !important;
+        zoom: 80%;
+        color: var(--text-dark);
+        background: #ffffff;
+        line-height: var(--line-height);
+    }
+
+    table tr td,
+    table tr,
+    th {
+        font-size: $font_size !important;
+    }
+
+    html {
+        width: 210mm;
+        height: 200mm;
+    }
+
+    @page {
+        margin-left: $global_margin;
+        margin-right: $global_margin;
+        margin-top: 0;
+        margin-bottom: 0;
+        size: $page_size $page_layout;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* En-tête moderne avec séparation visuelle */
+    .header-wrapper {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2rem;
+        line-height: var(--line-height);
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid var(--primary-color);
+        position: relative;
+    }
+
+    .header-wrapper::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--secondary-color);
+    }
+
+    .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .client-wrapper {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: var(--accent-color);
+        border-radius: var(--border-radius);
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .company-logo {
+        max-width: $company_logo_size;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+    }
+
+    .header-wrapper #company-address {
+        display: flex;
+        flex-direction: column;
+        line-height: var(--line-height);
+        color: var(--text-muted);
+    }
+
+    #entity-container {
+        margin-right: 0;
+        margin-left: auto;
+        background: white;
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+    }
+
+    #entity-details {
+        text-align: left;
+        line-height: var(--line-height) !important;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    #entity-details>tr,
+    #entity-details th {
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        line-height: var(--line-height) !important;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    #entity-details>tr:last-child,
+    #entity-details th:last-child {
+        border-bottom: none;
+    }
+
+    .header-wrapper #entity-details [data-element='entity-balance-due-label'],
+    .header-wrapper #entity-details [data-element='entity-balance-due'] {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        font-weight: 600;
+        border-radius: 4px;
+    }
+
+    #client-details {
+        display: flex;
+        flex-direction: column;
+        line-height: var(--line-height);
+    }
+
+    #client-details h3 {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 1.1em;
+    }
+
+    #shipping-details {
+        opacity: $show_shipping_address_visibility;
+        flex-direction: column;
+        line-height: var(--line-height);
+        white-space: nowrap;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Tableau moderne avec styles améliorés */
+    [data-ref="table"] {
+        margin-top: 2rem;
+        min-width: 100%;
+        table-layout: fixed;
+        overflow-wrap: break-word;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+    }
+
+    .task-time-details {
+        display: block;
+        margin-top: 5px;
+        color: var(--text-muted);
+        font-size: 0.9em;
+        font-style: italic;
+    }
+
+    [data-ref="table"]>thead {
+        text-align: left;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+
+    [data-ref="table"]>thead>tr>th {
+        padding: 1rem 0.75rem;
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85em;
+        letter-spacing: 0.5px;
+    }
+
+    [data-ref="table"]>thead>tr>th:last-child {
+        text-align: right;
+    }
+
+    [data-ref="table"]>tbody>tr>td {
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 0.75rem;
+        transition: background-color 0.2s ease;
+    }
+
+    [data-ref="table"]>tbody>tr:hover>td {
+        background-color: var(--accent-color);
+    }
+
+    [data-ref="table"]>tbody>tr:nth-child(even) {
+        background-color: #fafbfc;
+    }
+
+    [data-ref="table"]>tbody>tr>td:last-child {
+        text-align: right;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    /* Section des totaux redesignée */
+    #table-totals {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+        page-break-inside: auto;
+        overflow: visible !important;
+    }
+
+    #table-totals .totals-table-right-side {
+        background: var(--accent-color);
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--shadow);
+    }
+
+    #table-totals .totals-table-right-side>* {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    #table-totals .totals-table-right-side>*:last-child {
+        border-bottom: none;
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+        border-top: 2px solid var(--primary-color);
+    }
+
+    #table-totals>.totals-table-right-side>*> :nth-child(1) {
+        text-align: $dir_text_align;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+
+    #table-totals>.totals-table-right-side>*> :nth-child(2) {
+        text-align: right;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    #table-totals>* [data-element='total-table-balance-due-label'],
+    #table-totals>* [data-element='total-table-balance-due'] {
+        font-weight: bold;
+        font-size: 1.1em;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white !important;
+        padding: 0.75rem;
+        border-radius: 4px;
+        margin: 0 -0.5rem;
+    }
+
+    [data-ref="total_table-footer"] {
+        padding-left: 0rem;
+        margin-top: 1rem;
+        color: var(--text-muted);
+        font-size: 0.9em;
+    }
+
+    #footer {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-color);
+        text-align: center;
+    }
+
+    [data-ref="totals_table-outstanding"] {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    /** Styles Markdown améliorés **/
+    [data-ref="table"] h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    [data-ref="totals_table-outstanding-label"],
+    [data-ref="totals_table-outstanding"] {
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+        color: white !important;
+        padding: 0.75rem;
+        font-weight: 600;
+        border-radius: 4px;
+    }
+
+    [data-ref="statement-totals"] {
+        margin-top: 1rem;
+        text-align: right;
+        margin-right: .75rem;
+        font-weight: 600;
+    }
+
+    [data-ref*=".line_total-td"] {
+        white-space: nowrap;
+    }
+
+    /* En-têtes et pieds de page répétitifs */
+    .repeating-footer,
+    .repeating-footer-space {
+        height: 15px;
+    }
+
+    .repeating-header {
+        position: fixed;
+        top: 0;
+    }
+
+    .repeating-footer {
+        position: fixed;
+        bottom: 0;
+    }
+
+    [data-ref='product_table-product.description-td'],
+    [data-ref='task_table-task.description-th'] {
+        min-width: 200px !important;
+        overflow-wrap: break-word;
+    }
+
+    /* Tampons améliorés */
+    .stamp {
+        transform: rotate(12deg);
+        color: #555;
+        font-size: 3rem;
+        font-weight: 700;
+        border: 0.25rem solid #555;
+        display: inline-block;
+        padding: 0.25rem 1rem;
+        text-transform: uppercase;
+        border-radius: 1rem;
+        font-family: 'Courier New', monospace;
+        mix-blend-mode: multiply;
+        z-index: 200 !important;
+        position: fixed;
+        text-align: center;
+    }
+
+    .is-paid {
+        color: #27ae60;
+        border: 0.5rem double #27ae60;
+        transform: rotate(-8deg);
+        font-size: 4rem;
+        font-family: "Inter", "Open Sans", Helvetica, Arial, sans-serif;
+        border-radius: 8px;
+        padding: 1rem;
+        opacity: 0.15;
+        z-index: 200 !important;
+        position: fixed;
+        display: $show_paid_stamp;
+        background: rgba(39, 174, 96, 0.05);
+    }
+
+    .project-header {
+        font-size: 1.3em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        font-weight: 600;
+        color: var(--primary-color);
+        border-left: 4px solid var(--primary-color);
+        padding-left: 1rem;
+        background: var(--accent-color);
+        padding: 0.75rem 1rem;
+        border-radius: var(--border-radius);
+    }
+
+    #logo-container {
+        margin-right: 0;
+        margin-left: auto;
+        text-align: right;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .pqrcode {
+        border: 2px solid var(--border-color);
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        background: white;
+    }
+
+    #qr-bill {
+        width: 100% !important;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+    }
+
+    /* Ajouts pour une meilleure lisibilité */
+    strong {
+        color: var(--text-dark);
+        font-weight: 600;
+    }
+
+    .text-highlight {
+        background: linear-gradient(120deg, var(--primary-color) 0%, var(--primary-color) 100%);
+        background-repeat: no-repeat;
+        background-size: 100% 3px;
+        background-position: 0 88%;
+        padding-bottom: 2px;
+    }
+
+    /* Responsive pour les petits écrans */
+    @media print and (max-width: 600px) {
+        .header-wrapper {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .client-wrapper {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        #table-totals {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    /** Snippets utiles, décommentez pour activer **/
+
+    /** Masquer le logo de l'entreprise **/
+    /* .company-logo { display: none } */
+
+    /* Masquer les détails de l'entreprise */
+    /* #company-details > * { display: none } */
+
+    /* Masquer l'adresse de l'entreprise */
+    /* #company-address > * { display: none } */
+
+    /* Masquer les notes publiques */
+    /* [data-ref="total_table-public_notes"] { display: none } */
+
+    /* Masquer le libellé des termes */
+    /* [data-ref="total_table-terms-label"] { display: none } */
+
+    /* Masquer le tableau des totaux */
+    /* #table-totals { display: none } */
+
+    /* Masquer le côté gauche du tableau des totaux */
+    /* #table-totals div:first-child > * { display: none !important } */
+
+    /* Masquer le côté droit du tableau des totaux */
+    /* .totals-table-right-side { display: none } */
+
+    /** Pour plus d'informations, consultez notre documentation: https://invoiceninja.github.io **/
+    /** Pour découvrir les sélecteurs par vous-même: https://invoiceninja.github.io/docs/custom-fields/#snippets **/
+</style>
+<!-- STYLE END -->
+
+
+
+<!-- HEADER START -->
+<div class="repeating-header" id="header"></div>
+<!-- HEADER END -->
+
+<!-- BODY START -->
+<div id="body">
+    <div class="header-wrapper">
+        <div class="company-info">
+            <div id="company-details"><!--COMP-DETAILS--></div>
+            <div id="company-address"><!--COMP-ADRESS--></div>
+        </div>
+        <div id="logo-container">
+            <img class="company-logo" src="$company.logo" alt="$company.name logo">
+        </div>
+    </div>
+    
+    <div class="client-wrapper">
+        <div id="client-details"><!--CLIENT-DET--></div>
+        <div id="shipping-details"><!--SHIP-DET--></div>
+        <div id="entity-container">
+            <table id="entity-details" cellspacing="0" cellpadding="0" dir="$dir"><!--ENTITY-DET--></table>
+        </div>
+    </div>
+    
+    <table id="product-table" cellspacing="0" data-ref="table"><!--PRODUCTS--></table>
+    <table id="task-table" cellspacing="0" data-ref="table"><!--TASKS--></table>
+
+    <table id="statement-unapplied-payment-table" cellspacing="0" data-ref="table"></table>
+    <div id="statement-unapplied-payment-table-totals" data-ref="statement-totals"></div>
+
+    <div id="table-totals" cellspacing="0">$status_logo</div>
+</div>
+<!-- BODY END -->
+
+<!-- FOOTER START -->
+<div class="repeating-footerx" id="footer">
+    <p data-ref="total_table-footer">$entity_footer</p>
+</div>
+<!-- FOOTER END -->
