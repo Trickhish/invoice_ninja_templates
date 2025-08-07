@@ -23,6 +23,7 @@
         --text-dark: #5d4037;
         --text-muted: #8d6e63;
         --outstanding-color: #d48806;
+        --dark-gray: #353532;
         --line-height: 1.6;
         --border-radius: 8px;
         --shadow: 0 2px 4px rgba(239,191,132,0.15);
@@ -69,20 +70,9 @@
         grid-template-columns: 1fr auto;
         gap: 1.5rem;
         line-height: var(--line-height);
-        margin-bottom: 1.5rem;
+        margin-bottom: .5rem;
         padding-bottom: 1rem;
-        border-bottom: 2px solid var(--primary-color);
         position: relative;
-    }
-
-    .header-wrapper::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 60px;
-        height: 4px;
-        background: var(--secondary-color);
     }
 
     .company-info {
@@ -123,7 +113,7 @@
         padding: 0.75rem;
         border-radius: var(--border-radius);
         box-shadow: var(--shadow);
-        border: 1px solid var(--border-color);
+        border: none;
     }
 
     #entity-details {
@@ -135,10 +125,9 @@
 
     #entity-details>tr,
     #entity-details th {
-        font-weight: 500;
-        padding: 0.4rem 0.75rem;
+        font-weight: 500; 
+        padding: 2px 0.75rem;
         line-height: var(--line-height) !important;
-        border-bottom: 1px solid var(--border-color);
     }
 
     #entity-details>tr:last-child,
@@ -188,6 +177,11 @@
         border: 1px solid var(--border-color);
     }
 
+    #statement-unapplied-payment-table {
+        box-shadow: none;
+        border: none;
+    }
+
     .task-time-details {
         display: block;
         margin-top: 5px;
@@ -198,7 +192,7 @@
 
     [data-ref="table"]>thead {
         text-align: left;
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        background: var(--dark-gray);
     }
 
     [data-ref="table"]>thead>tr>th {
@@ -220,10 +214,6 @@
         transition: background-color 0.2s ease;
     }
 
-    [data-ref="table"]>tbody>tr:hover>td {
-        background-color: var(--accent-color);
-    }
-
     [data-ref="table"]>tbody>tr:nth-child(even) {
         background-color: #fafbfc;
     }
@@ -231,7 +221,8 @@
     [data-ref="table"]>tbody>tr>td:last-child {
         text-align: right;
         font-weight: 600;
-        color: var(--primary-color);
+        /*color: var(--primary-color);*/
+        color: var(--dark-gray);
     }
 
     /* Section des totaux redesignÃ©e */
@@ -248,7 +239,7 @@
         background: var(--accent-color);
         padding: 1rem;
         border-radius: var(--border-radius);
-        border: 1px solid var(--border-color);
+        border: none;
         box-shadow: var(--shadow);
     }
 
@@ -257,14 +248,12 @@
         grid-template-columns: 1fr auto;
         gap: 1rem;
         padding: 0.3rem 0;
-        border-bottom: 1px solid var(--border-color);
     }
 
     #table-totals .totals-table-right-side>*:last-child {
         border-bottom: none;
         margin-top: 0.3rem;
         padding-top: 0.75rem;
-        border-top: 2px solid var(--primary-color);
     }
 
     #table-totals>.totals-table-right-side>*> :nth-child(1) {
@@ -276,14 +265,15 @@
     #table-totals>.totals-table-right-side>*> :nth-child(2) {
         text-align: right;
         font-weight: 600;
-        color: var(--primary-color);
+        /*color: var(--primary-color);*/
+        color: var(--dark-gray);
     }
 
     #table-totals>* [data-element='total-table-balance-due-label'],
     #table-totals>* [data-element='total-table-balance-due'] {
         font-weight: bold;
         font-size: 1.05em;
-        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        background: var(--dark-gray);
         color: white !important;
         padding: 0.6rem;
         border-radius: 4px;
@@ -300,7 +290,6 @@
     #footer {
         margin-top: 2rem;
         padding-top: 1.5rem;
-        border-top: 1px solid var(--border-color);
         text-align: center;
     }
 
@@ -319,7 +308,8 @@
 
     [data-ref="totals_table-outstanding-label"],
     [data-ref="totals_table-outstanding"] {
-        background: linear-gradient(135deg, var(--outstanding-color), #b8860b);
+        /*background: linear-gradient(135deg, var(--outstanding-color), #b8860b);*/
+        background: var(--dark-gray); 
         color: white !important;
         padding: 0.75rem;
         font-weight: 600;
